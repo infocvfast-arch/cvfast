@@ -8,134 +8,200 @@
 <style>
 *{box-sizing:border-box}
 
+:root{
+  --bg:#051712;
+  --card:#102f27;
+  --card2:#163d31;
+  --line:#2a5849;
+  --green:#79e5b1;
+  --green2:#a9f2d0;
+  --muted:#b8ccc4;
+  --paypal:#ffc439;
+}
+
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:#071b17;
+  font-family:Inter,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(70,160,110,.18),transparent 30%),
+    linear-gradient(180deg,var(--bg),#03100c);
   color:#fff;
 }
 
 .wrap{
-  width:min(900px,calc(100% - 30px));
+  width:min(1100px,calc(100% - 30px));
   margin:auto;
 }
 
 header{
   padding:22px 0;
-  border-bottom:1px solid #255143;
+  border-bottom:1px solid var(--line);
 }
 
 .logo{
   font-size:22px;
-  font-weight:900;
+  font-weight:950;
   letter-spacing:3px;
 }
 
-main{padding:55px 0}
+main{
+  padding:55px 0;
+}
+
+.back{
+  display:inline-block;
+  margin-bottom:28px;
+  color:var(--green);
+  text-decoration:none;
+  font-weight:800;
+}
 
 h1{
-  font-size:42px;
+  font-size:clamp(38px,6vw,58px);
   margin:0 0 12px;
 }
 
 .lead{
-  color:#b9cec6;
-  line-height:1.6;
-  margin-bottom:35px;
+  max-width:760px;
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:36px;
 }
 
 .packages{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
 }
 
 .card{
-  background:#102f27;
-  border:1px solid #255143;
-  padding:25px;
-  border-radius:20px;
+  background:linear-gradient(180deg,var(--card2),var(--card));
+  border:1px solid var(--line);
+  padding:27px;
+  border-radius:24px;
   display:flex;
   flex-direction:column;
 }
 
 .card.popular{
-  border:2px solid #68e0aa;
+  border:2px solid var(--green);
 }
 
 .badge{
   display:inline-block;
   width:max-content;
-  background:#68e0aa;
+  background:var(--green);
   color:#062018;
-  padding:6px 10px;
-  border-radius:20px;
+  padding:7px 11px;
+  border-radius:999px;
   font-size:12px;
-  font-weight:bold;
+  font-weight:950;
+  margin-bottom:12px;
 }
 
 .price{
-  font-size:42px;
-  font-weight:900;
-  margin:18px 0;
+  font-size:48px;
+  font-weight:950;
+  margin:16px 0 8px;
+}
+
+.delivery{
+  color:var(--green);
+  font-weight:850;
+  margin-bottom:10px;
 }
 
 p{
-  color:#b9cec6;
-  line-height:1.6;
+  color:var(--muted);
+  line-height:1.65;
+}
+
+ul{
+  list-style:none;
+  padding:0;
+  margin:18px 0 26px;
+}
+
+li{
+  color:var(--muted);
+  margin:10px 0;
+  line-height:1.5;
+}
+
+li::before{
+  content:"✓";
+  color:var(--green);
+  font-weight:950;
+  margin-right:9px;
 }
 
 .btn{
   display:block;
   text-align:center;
-  padding:15px;
+  padding:16px;
   margin-top:auto;
-  border-radius:12px;
-  background:#ffc439;
+  border-radius:13px;
+  background:var(--paypal);
   color:#111;
-  font-weight:900;
+  font-weight:950;
   text-decoration:none;
 }
 
-.send-btn{
+.priority{
+  margin-top:24px;
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#0d2922;
+}
+
+.priority strong{
+  color:var(--green);
+}
+
+.priority-btn{
   display:inline-block;
-  text-align:center;
-  padding:16px 24px;
-  margin-top:12px;
-  border-radius:12px;
-  background:#68e0aa;
+  padding:15px 22px;
+  border-radius:13px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
   color:#062018;
-  font-weight:900;
+  font-weight:950;
   text-decoration:none;
+  margin-top:10px;
 }
 
 .help{
   margin-top:40px;
-  padding:25px;
-  border:1px solid #255143;
-  border-radius:18px;
+  padding:28px;
+  border:1px solid var(--line);
+  border-radius:20px;
   background:#0d2922;
 }
 
-.help a{
-  color:#68e0aa;
+.send-btn{
+  display:inline-block;
+  padding:16px 24px;
+  margin-top:12px;
+  border-radius:13px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  color:#062018;
+  font-weight:950;
+  text-decoration:none;
 }
 
-.back{
-  display:inline-block;
-  margin-bottom:25px;
-  color:#68e0aa;
-  text-decoration:none;
+.help a{
+  color:var(--green);
 }
 
 footer{
   margin-top:50px;
-  padding:30px 0;
-  border-top:1px solid #255143;
-  color:#b9cec6;
+  padding:32px 0;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  line-height:1.8;
 }
 
-@media(max-width:750px){
+@media(max-width:760px){
   .packages{
     grid-template-columns:1fr;
   }
@@ -156,14 +222,48 @@ footer{
 
 <a class="back" href="/">← Back to CVFAST</a>
 
-<h1>Order your CV</h1>
+<h1>Choose your CV service</h1>
 
 <p class="lead">
-Choose your package below and complete your payment securely through PayPal.
-After payment, use the order form to send your details and upload your current CV.
+Choose the service that fits your needs and complete your payment securely through PayPal.
+After payment, submit your order details and upload your current CV.
 </p>
 
 <div class="packages">
+
+<!-- AI CV -->
+<div class="card">
+
+<span class="badge">FASTEST</span>
+
+<h2>AI CV Generator</h2>
+
+<div class="price">€9.99</div>
+
+<div class="delivery">
+Instant — usually within minutes
+</div>
+
+<p>
+Create a professional first version of your CV with AI.
+</p>
+
+<ul>
+  <li>AI-generated CV content</li>
+  <li>ATS-friendly structure</li>
+  <li>Career-focused wording</li>
+  <li>Digital CV output</li>
+</ul>
+
+<a
+class="btn"
+href="https://www.paypal.com/ncp/payment/Z2PCVHGSJLMZY"
+target="_blank"
+rel="noopener">
+Pay €9.99 with PayPal
+</a>
+
+</div>
 
 <!-- CV REFRESH -->
 <div class="card">
@@ -172,10 +272,20 @@ After payment, use the order form to send your details and upload your current C
 
 <div class="price">€19</div>
 
+<div class="delivery">
+Delivery: 1–4 business days
+</div>
+
 <p>
-Modernize and improve your existing CV with professional,
-ATS-friendly formatting.
+Improve and modernise your existing CV with professional ATS-friendly formatting.
 </p>
+
+<ul>
+  <li>Modern professional layout</li>
+  <li>ATS-friendly formatting</li>
+  <li>Improved structure</li>
+  <li>Language and clarity review</li>
+</ul>
 
 <a
 class="btn"
@@ -187,7 +297,6 @@ Pay €19 with PayPal
 
 </div>
 
-
 <!-- PROFESSIONAL CV -->
 <div class="card popular">
 
@@ -195,57 +304,98 @@ Pay €19 with PayPal
 
 <h2>Professional CV</h2>
 
-<div class="price">€59</div>
+<div class="price">€49</div>
+
+<div class="delivery">
+Delivery: 1–3 business days
+</div>
 
 <p>
-A professionally written and ATS-optimized CV designed for
-international job applications.
+A professionally written and ATS-optimized CV built around your experience and target roles.
 </p>
+
+<ul>
+  <li>Professional CV writing</li>
+  <li>ATS optimization</li>
+  <li>Achievement-focused wording</li>
+  <li>Modern international format</li>
+  <li>Career-focused structure</li>
+</ul>
 
 <a
 class="btn"
-href="https://www.paypal.com/ncp/payment/2QGUD5NTKQ38G"
+href="https://www.paypal.com/ncp/payment/MPKT58WSZJSFW"
 target="_blank"
 rel="noopener">
-Pay €59 with PayPal
+Pay €49 with PayPal
 </a>
 
 </div>
-
 
 <!-- CV + COVER LETTER -->
 <div class="card">
 
 <h2>CV + Cover Letter</h2>
 
-<div class="price">€89</div>
+<div class="price">€69</div>
+
+<div class="delivery">
+Delivery: 1–3 business days
+</div>
 
 <p>
-Complete professional CV and cover letter package for stronger
-job applications.
+A complete professional CV and cover letter package for stronger job applications.
 </p>
+
+<ul>
+  <li>Professional CV</li>
+  <li>ATS optimization</li>
+  <li>Professional cover letter</li>
+  <li>International application format</li>
+  <li>Complete application package</li>
+</ul>
 
 <a
 class="btn"
-href="https://www.paypal.com/ncp/payment/UJ3VXRNT8XE44"
+href="https://www.paypal.com/ncp/payment/N2CG6WEY6ASFN"
 target="_blank"
 rel="noopener">
-Pay €89 with PayPal
+Pay €69 with PayPal
 </a>
 
 </div>
 
 </div>
 
+<!-- PRIORITY -->
+
+<div class="priority">
+
+<h2>Need it sooner?</h2>
+
+<p>
+<strong>Priority Delivery +€8</strong><br>
+Add priority handling to a human-written CV order. Your order will be moved forward in the queue and prepared as soon as possible.
+</p>
+
+<a
+class="priority-btn"
+href="https://www.paypal.com/ncp/payment/YYJWX6MMC5G5W"
+target="_blank"
+rel="noopener">
+Add Priority Delivery +€8
+</a>
+
+</div>
 
 <!-- AFTER PAYMENT -->
+
 <div class="help">
 
 <h2>Already paid?</h2>
 
 <p>
-After completing your PayPal payment, send your order details and upload
-your current CV using the CVFAST Order Form.
+Complete the CVFAST Order Form and upload your current CV and career information so we can begin your order.
 </p>
 
 <a
@@ -256,7 +406,7 @@ rel="noopener">
 Send your CV & Order Details
 </a>
 
-<p style="margin-top:25px">
+<p style="margin-top:26px">
 Need help? WhatsApp:
 <a
 href="https://wa.me/31684071847?text=Hi%20CVFAST%2C%20I%20need%20help%20with%20my%20order."
@@ -280,11 +430,15 @@ infocvfast@gmail.com
 
 <footer>
 <div class="wrap">
-<strong>CVFAST</strong><br>
+
+<strong style="color:#fff">CVFAST</strong><br>
 Professional CV & Resume Services<br><br>
-Payments are securely processed by PayPal.<br>
+
+Secure payments are processed through PayPal.<br>
 CVFAST does not store your bank or card details.<br><br>
+
 © 2026 CVFAST. All rights reserved.
+
 </div>
 </footer>
 
