@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CVFAST — Professional CV Service</title>
+  <meta name="description" content="Professional ATS-friendly CV writing, CV refresh and cover letter services.">
+
+  <style>
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    :root{
+      --bg:#071b17;
+      --bg2:#0c2820;
+      --card:#102f27;
+      --card2:#153a30;
+      --line:#255143;
+      --green:#68e0aa;
+      --green2:#9af0c6;
+      --text:#f7fbf9;
+      --muted:#b9cec6;
+      --dark:#06120f;
+    }
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at top right,#174936 0,transparent 34%),
+        linear-gradient(180deg,var(--bg),#061511);
+      color:var(--text);
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .wrap{
+      width:min(1100px,calc(100% - 32px));
+      margin:auto;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(16px);
+      background:rgba(7,27,23,.88);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    nav{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .logo{
+      font-weight:900;
+      letter-spacing:.18em;
+      font-size:20px;
+    }
+
+    .navlinks{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+      padding:0 24px;
+      border-radius:16px;
+      font-weight:800;
+      border:1px solid var(--line);
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--green),var(--green2));
+      color:#062018;
+      border:0;
+    }
+
+    .hero{
+      padding:90px 0 70px;
+    }
+
+    .eyebrow{
+      color:var(--green);
+      letter-spacing:.22em;
+      font-size:13px;
+      font-weight:900;
+      margin-bottom:20px;
+    }
+
+    h1{
+      font-size:clamp(45px,8vw,82px);
+      line-height:.96;
+      max-width:850px;
+      margin:0 0 28px;
+      letter-spacing:-.045em;
+    }
+
+    .lead{
+      color:var(--muted);
+      font-size:20px;
+      line-height:1.65;
+      max-width:720px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:34px;
+    }
+
+    .trust{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:52px;
+    }
+
+    .trust div{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.025);
+      padding:18px;
+      border-radius:16px;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    section{
+      padding:70px 0;
+    }
+
+    .section-title{
+      font-size:clamp(32px,5vw,50px);
+      margin:0 0 14px;
+    }
+
+    .section-lead{
+      color:var(--muted);
+      max-width:700px;
+      line-height:1.65;
+      margin-bottom:35px;
+    }
+
+    .packages{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .package{
+      position:relative;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,var(--card2),var(--card));
+      border-radius:24px;
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      min-height:480px;
+    }
+
+    .popular{
+      border-color:var(--green);
+      transform:translateY(-8px);
+    }
+
+    .badge{
+      display:inline-block;
+      width:max-content;
+      color:#062018;
+      background:var(--green);
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:12px;
+      font-weight:900;
+      margin-bottom:16px;
+    }
+
+    .package h3{
+      font-size:25px;
+      margin:0 0 8px;
+    }
+
+    .price{
+      font-size:48px;
+      font-weight:900;
+      margin:14px 0;
+    }
+
+    .package p{
+      color:var(--muted);
+      line-height:1.55;
+    }
+
+    ul{
+      padding:0;
+      margin:18px 0 28px;
+      list-style:none;
+    }
+
+    li{
+      color:var(--muted);
+      margin:12px 0;
+    }
+
+    li::before{
+      content:"✓";
+      color:var(--green);
+      margin-right:10px;
+      font-weight:900;
+    }
+
+    .package .btn{
+      margin-top:auto;
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
+    .step{
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:rgba(255,255,255,.025);
+      padding:24px;
+    }
+
+    .step-num{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--green);
+      color:var(--dark);
+      font-weight:900;
+      margin-bottom:18px;
+    }
+
+    .step p{
+      color:var(--muted);
+      line-height:1.55;
+    }
+
+    .contact{
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:38px;
+      background:linear-gradient(135deg,#12382d,#0b251e);
+    }
+
+    .contact-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      padding:35px 0 50px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.8;
+    }
+
+    .whatsapp{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      z-index:50;
+      padding:15px 18px;
+      border-radius:999px;
+      background:#25D366;
+      color:#071b17;
+      font-weight:900;
+      box-shadow:0 15px 40px rgba(0,0,0,.35);
+    }
+
+    @media(max-width:850px){
+      .navlinks a:not(.order){display:none}
+      .packages,.steps,.trust{grid-template-columns:1fr}
+      .popular{transform:none}
+      .hero{padding-top:65px}
+      .package{min-height:auto}
+      .whatsapp{
+        right:14px;
+        bottom:14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#">CVFAST</a>
+
+      <div class="navlinks">
+        <a href="#packages">Services</a>
+        <a href="#how">How it works</a>
+        <a class="btn btn-primary order" href="#packages">Order CV</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">CV • RESUME • CAREER</div>
+
+      <h1>Build a CV that gets you noticed.</h1>
+
+      <p class="lead">
+        Professional, modern and ATS-friendly CV services for international
+        job applications. Choose your package and pay securely through PayPal.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#packages">Choose your package</a>
+        <a class="btn" href="#how">How it works</a>
+      </div>
+
+      <div class="trust">
+        <div>✓ ATS-friendly formatting</div>
+        <div>✓ International applications</div>
+        <div>✓ Secure PayPal payment</div>
+        <div>✓ Direct WhatsApp support</div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="packages">
+    <div class="wrap">
+
+      <h2 class="section-title">Choose your CV package</h2>
+
+      <p class="section-lead">
+        Select the service you need. The PayPal button takes you directly
+        to the secure checkout for that package.
+      </p>
+
+      <div class="packages">
+
+        <article class="package">
+          <h3>CV Refresh</h3>
+          <div class="price">€39</div>
+
+          <p>Improve and modernize your existing CV.</p>
+
+          <ul>
+            <li>Modern professional layout</li>
+            <li>ATS-friendly formatting</li>
+            <li>Improved structure</li>
+            <li>Language and clarity review</li>
+          </ul>
+
+          <a
+            class="btn btn-primary"
+            href="https://www.paypal.com/ncp/payment/JHFATWCXM2RV8"
+            target="_blank"
+            rel="noopener">
+            Pay €39 with PayPal
+          </a>
+        </article>
+
+
+        <article class="package popular">
+          <span class="badge">MOST POPULAR</span>
+
+          <h3>Professional CV</h3>
+          <div class="price">€59</div>
+
+          <p>A professionally prepared CV built for your career goals.</p>
+
+          <ul>
+            <li>Professional CV writing</li>
+            <li>ATS optimization</li>
+            <li>Strong achievement-focused wording</li>
+            <li>Modern international format</li>
+            <li>Career-focused structure</li>
+          </ul>
+
+          <a
+            class="btn btn-primary"
+            href="https://www.paypal.com/ncp/payment/2QGUD5NTKQ38G"
+            target="_blank"
+            rel="noopener">
+            Pay €59 with PayPal
+          </a>
+        </article>
+
+
+        <article class="package">
+          <h3>CV + Cover Letter</h3>
+          <div class="price">€89</div>
+
+          <p>Complete application package for stronger job applications.</p>
+
+          <ul>
+            <li>Professional CV</li>
+            <li>ATS optimization</li>
+            <li>Professional cover letter</li>
+            <li>International application format</li>
+            <li>Complete application package</li>
+          </ul>
+
+          <a
+            class="btn btn-primary"
+            href="https://www.paypal.com/ncp/payment/UJ3VXRNT8XE44"
+            target="_blank"
+            rel="noopener">
+            Pay €89 with PayPal
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section id="how">
+    <div class="wrap">
+
+      <h2 class="section-title">How it works</h2>
+
+      <p class="section-lead">
+        A simple process from choosing your package to receiving your CV.
+      </p>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Choose</h3>
+          <p>Select the CV package that matches what you need.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Pay securely</h3>
+          <p>Complete your payment through the official PayPal checkout.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Send details</h3>
+          <p>Send your existing CV and career information through WhatsApp or email.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Receive your CV</h3>
+          <p>Your professional CV is prepared and delivered digitally.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="wrap">
+
+      <div class="contact">
+        <h2 class="section-title">Need help before ordering?</h2>
+
+        <p class="section-lead">
+          Contact CVFAST directly. Tell us which service you are interested in
+          and we will help you choose the right package.
+        </p>
+
+        <div class="contact-actions">
+
+          <a
+            class="btn btn-primary"
+            href="https://wa.me/31684071847?text=Hi%20CVFAST%2C%20I%20would%20like%20help%20choosing%20a%20CV%20package."
+            target="_blank"
+            rel="noopener">
+            WhatsApp CVFAST
+          </a>
+
+          <a class="btn" href="mailto:infocvfast@gmail.com">
+            Email us
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+
+<footer>
+  <div class="wrap">
+
+    <strong>CVFAST</strong><br>
+    Professional CV & resume services<br>
+    Email: infocvfast@gmail.com<br>
+    WhatsApp: +31 6 84071847
+
+    <br><br>
+
+    Secure payments are processed by PayPal.
+    CVFAST does not store your payment card information.
+
+    <br><br>
+
+    © 2026 CVFAST. All rights reserved.
+
+  </div>
+</footer>
+
+
+<a
+  class="whatsapp"
+  href="https://wa.me/31684071847?text=Hi%20CVFAST%2C%20I%20have%20a%20question."
+  target="_blank"
+  rel="noopener">
+  WhatsApp
+</a>
+
+</body>
+</html>
