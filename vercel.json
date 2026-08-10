@@ -1,1 +1,6 @@
-
+{
+  "rewrites": [
+    { "source": "/order", "destination": "/order.html" },
+    { "source": "/send", "destination": "/upload.html" }
+  ]
+}
