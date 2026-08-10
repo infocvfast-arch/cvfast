@@ -6,25 +6,40 @@
 
 <title>Send Your CV — CVFAST</title>
 
+<meta
+  name="description"
+  content="Complete your CVFAST order and upload your CV and career details."
+>
+
 <style>
 *{box-sizing:border-box}
 
 :root{
   --bg:#051712;
   --card:#102f27;
+  --card2:#163d31;
   --line:#2a5849;
   --green:#79e5b1;
   --green2:#a9f2d0;
   --muted:#b8ccc4;
+  --text:#f8fbfa;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
   margin:0;
-  font-family:Inter,Arial,sans-serif;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   background:
     radial-gradient(circle at 80% 0%,rgba(70,160,110,.18),transparent 30%),
     linear-gradient(180deg,var(--bg),#03100c);
-  color:#fff;
+  color:var(--text);
+}
+
+a{
+  text-decoration:none;
 }
 
 .wrap{
@@ -32,117 +47,231 @@ body{
   margin:auto;
 }
 
+/* HEADER */
+
 header{
-  padding:24px 0;
+  position:sticky;
+  top:0;
+  z-index:50;
+  padding:22px 0;
+  background:rgba(5,23,18,.96);
+  backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line);
 }
 
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
 .logo{
-  font-size:25px;
+  color:#fff;
+  font-size:24px;
   font-weight:950;
   letter-spacing:.18em;
 }
 
+.home-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:0 18px;
+  border-radius:13px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  color:#062018;
+  font-weight:950;
+}
+
+/* MAIN */
+
 main{
-  padding:55px 0 80px;
+  padding:52px 0 80px;
 }
 
 .back{
+  display:inline-block;
   color:var(--green);
-  text-decoration:none;
   font-size:17px;
-  font-weight:800;
+  font-weight:850;
+  margin-bottom:20px;
 }
 
 h1{
-  font-size:clamp(42px,8vw,64px);
-  margin:22px 0 15px;
+  font-size:clamp(40px,8vw,62px);
+  line-height:1.05;
+  margin:18px 0 16px;
+  letter-spacing:-.035em;
 }
 
 .lead{
   color:var(--muted);
   font-size:19px;
-  line-height:1.7;
+  line-height:1.75;
   max-width:720px;
 }
 
+/* CARD */
+
 .card{
-  margin-top:35px;
+  margin-top:34px;
   padding:30px;
   border:1px solid var(--line);
-  border-radius:24px;
-  background:var(--card);
+  border-radius:25px;
+  background:linear-gradient(180deg,var(--card2),var(--card));
 }
 
 .card h2{
-  margin-top:0;
+  margin:0 0 10px;
+  font-size:28px;
 }
+
+.card-intro{
+  color:var(--muted);
+  line-height:1.7;
+}
+
+/* STEPS */
 
 .steps{
   display:grid;
-  gap:14px;
-  margin:25px 0;
+  gap:13px;
+  margin:26px 0;
 }
 
 .step{
+  padding:18px;
   border:1px solid var(--line);
   border-radius:16px;
-  padding:18px;
+  background:rgba(255,255,255,.02);
+  color:var(--muted);
+  line-height:1.6;
 }
 
 .step strong{
+  display:block;
   color:var(--green);
+  margin-bottom:4px;
 }
 
+/* BUTTONS */
+
 .btn{
-  display:block;
+  display:flex;
   width:100%;
+  min-height:56px;
+  align-items:center;
+  justify-content:center;
   text-align:center;
   margin-top:22px;
-  padding:17px;
+  padding:0 20px;
   border-radius:14px;
   background:linear-gradient(135deg,var(--green),var(--green2));
   color:#062018;
   font-size:18px;
   font-weight:950;
-  text-decoration:none;
 }
 
 .secondary{
-  display:block;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:52px;
   text-align:center;
-  margin-top:14px;
-  padding:16px;
+  margin-top:13px;
+  padding:0 18px;
   border:1px solid var(--green);
   border-radius:14px;
   color:var(--green);
-  text-decoration:none;
   font-weight:850;
 }
 
-.note{
-  margin-top:20px;
-  color:var(--muted);
-  line-height:1.7;
+/* SERVICES */
+
+.services{
+  margin-top:26px;
+  padding:21px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:rgba(255,255,255,.02);
 }
 
-.packages{
+.services h3{
+  margin:0 0 15px;
+}
+
+.service{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  color:var(--muted);
+}
+
+.service:last-child{
+  border-bottom:0;
+}
+
+.service strong{
+  color:#fff;
+}
+
+.delivery-note{
+  margin-top:18px;
+  padding:17px;
+  border-radius:14px;
+  background:#0a251d;
+  border:1px solid var(--line);
+  color:var(--muted);
+  line-height:1.65;
+}
+
+.delivery-note strong{
+  color:var(--green);
+}
+
+/* NOTICE */
+
+.notice{
   margin-top:25px;
   padding:20px;
   border:1px solid var(--line);
   border-radius:16px;
+  color:var(--muted);
+  line-height:1.7;
 }
 
-.packages div{
-  margin:9px 0;
-  color:var(--muted);
+.notice strong{
+  color:#fff;
 }
+
+/* FOOTER */
 
 footer{
   border-top:1px solid var(--line);
-  padding:30px 0;
+  padding:32px 0 50px;
   color:var(--muted);
   line-height:1.8;
+  font-size:14px;
+}
+
+@media(max-width:600px){
+
+  .card{
+    padding:23px;
+  }
+
+  .service{
+    flex-direction:column;
+    gap:4px;
+  }
+
+  .home-btn{
+    padding:0 14px;
+  }
 }
 </style>
 </head>
@@ -150,87 +279,127 @@ footer{
 <body>
 
 <header>
-<div class="wrap">
-  <div class="logo">CVFAST</div>
+<div class="wrap header-inner">
+
+<a href="/" class="logo">
+CVFAST
+</a>
+
+<a href="/" class="home-btn">
+Home
+</a>
+
 </div>
 </header>
 
 <main>
 <div class="wrap">
 
-<a class="back" href="/">← Back to CVFAST</a>
+<a class="back" href="/">
+← Back to CVFAST
+</a>
 
 <h1>Send your CV & order details</h1>
 
 <p class="lead">
 Thank you for choosing CVFAST. If you have completed your payment,
-please submit your order details and upload your current CV using our secure order form.
+the next step is to submit your order details and upload your current CV.
 </p>
 
 <div class="card">
 
 <h2>Complete your order</h2>
 
+<p class="card-intro">
+Use the CVFAST Order Form to send the information we need to begin processing your order.
+</p>
+
 <div class="steps">
 
 <div class="step">
-<strong>1. Enter your details</strong><br>
-Name, email and target job.
+<strong>1. Enter your contact details</strong>
+Provide your full name and email address.
 </div>
 
 <div class="step">
-<strong>2. Select your service</strong><br>
-Choose the package you paid for.
+<strong>2. Select the service you purchased</strong>
+Choose the CVFAST package that matches your PayPal payment.
 </div>
 
 <div class="step">
-<strong>3. Upload your CV</strong><br>
-Attach your current CV or resume file.
+<strong>3. Add your career information</strong>
+Tell us your target role, preferred job market and any important instructions.
 </div>
 
 <div class="step">
-<strong>4. Submit your order</strong><br>
-CVFAST will receive your order and begin processing it.
+<strong>4. Upload your current CV</strong>
+Attach your existing CV or resume so we can review your experience and information.
+</div>
+
+<div class="step">
+<strong>5. Submit your order</strong>
+Once submitted, CVFAST will receive your information and begin processing your order.
 </div>
 
 </div>
 
 <a
-class="btn"
-href="https://tally.so/r/ja4aXY"
-target="_blank"
-rel="noopener">
+  class="btn"
+  href="https://tally.so/r/ja4aXY"
+  target="_blank"
+  rel="noopener">
 Open CVFAST Order Form
 </a>
 
-<div class="packages">
+<div class="services">
 
-<strong>Your current service options</strong>
+<h3>Your CVFAST services</h3>
 
-<div>AI CV Generator — €9.99</div>
-<div>CV Refresh — €19</div>
-<div>Professional CV — €49</div>
-<div>CV + Cover Letter — €69</div>
-<div>Priority Delivery — +€8</div>
+<div class="service">
+<strong>AI CV Generator</strong>
+<span>€9.99</span>
+</div>
+
+<div class="service">
+<strong>CV Refresh</strong>
+<span>From €19</span>
+</div>
+
+<div class="service">
+<strong>Professional CV</strong>
+<span>From €49</span>
+</div>
+
+<div class="service">
+<strong>CV + Cover Letter</strong>
+<span>From €69</span>
+</div>
+
+<div class="delivery-note">
+<strong>Standard or Priority Delivery</strong><br>
+For eligible human-written services, the delivery option is selected during PayPal checkout.
+Priority Delivery costs €8 more than the Standard option.
+</div>
 
 </div>
 
-<p class="note">
-Human-written services are delivered digitally according to the delivery time shown on the order page.
-Priority Delivery places your human-written order ahead in the queue.
-</p>
+<div class="notice">
+<strong>After submitting your order</strong><br>
+Human-written services are prepared according to the delivery option selected during checkout.
+Your completed documents will be delivered digitally using the contact information provided with your order.
+</div>
 
 <a
-class="secondary"
-href="https://wa.me/31684071847?text=Hi%20CVFAST%2C%20I%20have%20completed%20my%20payment%20and%20need%20help%20sending%20my%20CV."
-target="_blank"
-rel="noopener">
+  class="secondary"
+  href="https://wa.me/31684071847?text=Hi%20CVFAST%2C%20I%20have%20completed%20my%20payment%20and%20need%20help%20with%20my%20order."
+  target="_blank"
+  rel="noopener">
 Need help? WhatsApp CVFAST
 </a>
 
 <a
-class="secondary"
-href="mailto:infocvfast@gmail.com">
+  class="secondary"
+  href="mailto:infocvfast@gmail.com">
 Email CVFAST
 </a>
 
@@ -242,10 +411,22 @@ Email CVFAST
 <footer>
 <div class="wrap">
 
-<strong style="color:#fff">CVFAST</strong><br>
-Professional CV & Resume Services<br>
-Email: infocvfast@gmail.com<br>
-WhatsApp: +31 6 84071847<br><br>
+<strong style="color:#fff">
+CVFAST
+</strong>
+<br>
+
+Professional CV & Resume Services
+<br>
+
+Email: infocvfast@gmail.com
+<br>
+
+WhatsApp: +31 6 84071847
+<br><br>
+
+Your information is used to process your CVFAST order.
+<br>
 
 © 2026 CVFAST. All rights reserved.
 
