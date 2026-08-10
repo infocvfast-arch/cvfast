@@ -1,882 +1,201 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+export default async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-<title>AI CV Generator — CVFAST</title>
-
-<meta
-  name="description"
-  content="Create a professional ATS-friendly CV with CVFAST AI."
->
-
-<style>
-*{box-sizing:border-box}
-
-:root{
-  --bg:#051712;
-  --card:#102f27;
-  --card2:#163d31;
-  --line:#2a5849;
-  --green:#79e5b1;
-  --green2:#a9f2d0;
-  --text:#f8fbfa;
-  --muted:#b8ccc4;
-  --danger:#ff8585;
-}
-
-body{
-  margin:0;
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:
-    radial-gradient(circle at 80% 0%,rgba(70,160,110,.20),transparent 30%),
-    linear-gradient(180deg,var(--bg),#03100c);
-  color:var(--text);
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-.wrap{
-  width:min(900px,calc(100% - 30px));
-  margin:auto;
-}
-
-header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(5,23,18,.96);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
-}
-
-nav{
-  min-height:74px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:950;
-  letter-spacing:.18em;
-}
-
-.back{
-  color:var(--green);
-  font-weight:850;
-}
-
-main{
-  padding:55px 0 90px;
-}
-
-.eyebrow{
-  color:var(--green);
-  font-size:13px;
-  font-weight:950;
-  letter-spacing:.18em;
-  margin-bottom:15px;
-}
-
-h1{
-  margin:0;
-  font-size:clamp(40px,8vw,68px);
-  line-height:1.02;
-  letter-spacing:-.045em;
-}
-
-.lead{
-  max-width:760px;
-  color:var(--muted);
-  font-size:18px;
-  line-height:1.7;
-  margin:22px 0 32px;
-}
-
-.price-box{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  padding:22px;
-  border:1px solid var(--green);
-  border-radius:20px;
-  background:linear-gradient(135deg,var(--card2),var(--card));
-  margin-bottom:30px;
-}
-
-.price{
-  font-size:38px;
-  font-weight:950;
-}
-
-.price-note{
-  color:var(--green);
-  font-weight:800;
-}
-
-.card{
-  background:linear-gradient(180deg,var(--card2),var(--card));
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:28px;
-  margin-top:20px;
-}
-
-.card h2{
-  margin-top:0;
-  font-size:28px;
-}
-
-label{
-  display:block;
-  margin:18px 0 8px;
-  font-weight:850;
-}
-
-input,
-textarea{
-  width:100%;
-  border:1px solid var(--line);
-  background:#071d17;
-  color:#fff;
-  border-radius:13px;
-  padding:15px;
-  font:inherit;
-  outline:none;
-}
-
-input:focus,
-textarea:focus{
-  border-color:var(--green);
-}
-
-textarea{
-  min-height:125px;
-  resize:vertical;
-}
-
-.required{
-  color:var(--green);
-}
-
-.note{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.6;
-}
-
-.btn{
-  width:100%;
-  border:0;
-  border-radius:14px;
-  padding:17px 20px;
-  font:inherit;
-  font-weight:950;
-  cursor:pointer;
-  background:linear-gradient(135deg,var(--green),var(--green2));
-  color:#052017;
-}
-
-.btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-#paypal-section{
-  display:none;
-}
-
-#generate-section{
-  display:none;
-}
-
-#result-section{
-  display:none;
-}
-
-.status{
-  display:none;
-  margin-top:18px;
-  padding:14px 16px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  color:var(--muted);
-  line-height:1.5;
-}
-
-.status.show{
-  display:block;
-}
-
-.status.success{
-  border-color:var(--green);
-  color:var(--green);
-}
-
-.status.error{
-  border-color:var(--danger);
-  color:var(--danger);
-}
-
-#cv-output{
-  white-space:pre-wrap;
-  background:#061b15;
-  border:1px solid var(--line);
-  padding:22px;
-  border-radius:16px;
-  line-height:1.65;
-  color:#f4faf7;
-  overflow-wrap:anywhere;
-}
-
-.result-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:18px;
-}
-
-.secondary{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid var(--green);
-  background:transparent;
-  color:var(--green);
-}
-
-.security{
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-  margin-top:13px;
-}
-
-footer{
-  border-top:1px solid var(--line);
-  color:var(--muted);
-  padding:30px 0 50px;
-  font-size:14px;
-  line-height:1.7;
-}
-
-@media(max-width:650px){
-  .price-box{
-    display:block;
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
   }
 
-  .price-note{
-    margin-top:8px;
+  if (req.method !== "POST") {
+    return res.status(405).json({
+      success: false,
+      error: "Method not allowed"
+    });
   }
-
-  .card{
-    padding:21px;
-  }
-
-  .result-actions{
-    grid-template-columns:1fr;
-  }
-}
-
-@media print{
-  header,
-  .hero-area,
-  #form-section,
-  #paypal-section,
-  #generate-section,
-  .result-actions,
-  footer{
-    display:none !important;
-  }
-
-  body{
-    background:#fff;
-    color:#000;
-  }
-
-  #result-section{
-    display:block !important;
-  }
-
-  #cv-output{
-    border:0;
-    background:#fff;
-    color:#000;
-    padding:0;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<div class="wrap">
-<nav>
-  <a href="/" class="logo">CVFAST</a>
-  <a href="/" class="back">← Back</a>
-</nav>
-</div>
-</header>
-
-<main>
-<div class="wrap">
-
-<div class="hero-area">
-
-<div class="eyebrow">CVFAST AI</div>
-
-<h1>Create your professional CV with AI.</h1>
-
-<p class="lead">
-Enter your career information, complete the secure €9.99 payment,
-and CVFAST AI will create a professional ATS-friendly first version
-of your CV.
-</p>
-
-<div class="price-box">
-  <div>
-    <div class="price">€9.99</div>
-    <div class="price-note">AI CV Generator</div>
-  </div>
-
-  <div class="note">
-    One-time payment<br>
-    Digital AI-generated CV
-  </div>
-</div>
-
-</div>
-
-<section class="card" id="form-section">
-
-<h2>1. Your CV information</h2>
-
-<p class="note">
-Please provide accurate information. CVFAST AI will improve your wording,
-but it should not invent employment, education or qualifications.
-</p>
-
-<form id="cv-form">
-
-<label>
-Full name <span class="required">*</span>
-</label>
-
-<input
-  id="fullName"
-  name="fullName"
-  type="text"
-  autocomplete="name"
-  required
->
-
-<label>Email</label>
-
-<input
-  id="email"
-  name="email"
-  type="email"
-  autocomplete="email"
->
-
-<label>Phone</label>
-
-<input
-  id="phone"
-  name="phone"
-  type="tel"
-  autocomplete="tel"
->
-
-<label>Location</label>
-
-<input
-  id="location"
-  name="location"
-  type="text"
-  placeholder="Amsterdam, Netherlands"
->
-
-<label>
-Target job / role <span class="required">*</span>
-</label>
-
-<input
-  id="targetRole"
-  name="targetRole"
-  type="text"
-  placeholder="Example: Customer Service Specialist"
-  required
->
-
-<label>Professional summary / background</label>
-
-<textarea
-  id="summary"
-  name="summary"
-  placeholder="Tell us briefly about your professional background and career goals."
-></textarea>
-
-<label>Work experience</label>
-
-<textarea
-  id="experience"
-  name="experience"
-  placeholder="Company, job title, dates, responsibilities and achievements."
-></textarea>
-
-<label>Education</label>
-
-<textarea
-  id="education"
-  name="education"
-  placeholder="Degree, school/university, dates and relevant qualifications."
-></textarea>
-
-<label>Skills</label>
-
-<textarea
-  id="skills"
-  name="skills"
-  placeholder="Example: Customer service, Microsoft Office, sales, project coordination..."
-></textarea>
-
-<label>Languages</label>
-
-<textarea
-  id="languages"
-  name="languages"
-  placeholder="Example: English — Fluent, Dutch — B1"
-></textarea>
-
-<button
-  class="btn"
-  type="submit"
-  style="margin-top:24px"
->
-Continue to secure payment
-</button>
-
-</form>
-
-</section>
-
-<section class="card" id="paypal-section">
-
-<h2>2. Secure payment</h2>
-
-<p class="note">
-Complete your €9.99 payment securely through PayPal.
-CVFAST does not receive or store your card or bank details.
-</p>
-
-<div id="paypal-buttons-container"></div>
-
-<div id="payment-status" class="status"></div>
-
-<div class="security">
-Secure payment processing by PayPal
-</div>
-
-</section>
-
-<section class="card" id="generate-section">
-
-<h2>3. Generate your CV</h2>
-
-<p class="note">
-Payment confirmed. Your information is ready for CVFAST AI.
-</p>
-
-<button class="btn" id="generate-btn">
-Generate my CV
-</button>
-
-<div id="ai-status" class="status"></div>
-
-</section>
-
-<section class="card" id="result-section">
-
-<div class="eyebrow">YOUR AI CV</div>
-
-<h2>Your CV is ready</h2>
-
-<p class="note">
-Review the generated CV carefully before sending it to an employer.
-You remain responsible for checking that all information is accurate.
-</p>
-
-<div id="cv-output"></div>
-
-<div class="result-actions">
-
-<button
-  class="btn"
-  id="copy-btn"
-  type="button"
->
-Copy CV
-</button>
-
-<button
-  class="btn secondary"
-  id="print-btn"
-  type="button"
->
-Print / Save as PDF
-</button>
-
-</div>
-
-</section>
-
-</div>
-</main>
-
-<footer>
-<div class="wrap">
-
-<strong style="color:#fff">CVFAST</strong><br>
-AI & Professional CV Services<br>
-Email: infocvfast@gmail.com<br><br>
-
-AI-generated content should be reviewed for accuracy before use.
-Payments are processed securely through PayPal.
-
-</div>
-</footer>
-
-
-<!--
-IMPORTANT:
-Replace YOUR_PAYPAL_CLIENT_ID below with your PayPal public Client ID.
-Do NOT put your PayPal Secret here.
--->
-
-<script
-  src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR&intent=capture">
-</script>
-
-<script>
-const form = document.getElementById("cv-form");
-const paypalSection = document.getElementById("paypal-section");
-const generateSection = document.getElementById("generate-section");
-const resultSection = document.getElementById("result-section");
-
-const paymentStatus = document.getElementById("payment-status");
-const aiStatus = document.getElementById("ai-status");
-
-const generateButton = document.getElementById("generate-btn");
-
-let formData = null;
-let paymentCompleted = false;
-let paymentOrderID = null;
-let paypalRendered = false;
-
-
-function showStatus(element, message, type = "") {
-  element.textContent = message;
-  element.className = "status show";
-
-  if (type) {
-    element.classList.add(type);
-  }
-}
-
-
-function collectFormData() {
-  return {
-    fullName: document.getElementById("fullName").value.trim(),
-    email: document.getElementById("email").value.trim(),
-    phone: document.getElementById("phone").value.trim(),
-    location: document.getElementById("location").value.trim(),
-    targetRole: document.getElementById("targetRole").value.trim(),
-    summary: document.getElementById("summary").value.trim(),
-    experience: document.getElementById("experience").value.trim(),
-    education: document.getElementById("education").value.trim(),
-    skills: document.getElementById("skills").value.trim(),
-    languages: document.getElementById("languages").value.trim()
-  };
-}
-
-
-form.addEventListener("submit", async function(event) {
-  event.preventDefault();
-
-  formData = collectFormData();
-
-  if (!formData.fullName || !formData.targetRole) {
-    alert("Please enter your full name and target role.");
-    return;
-  }
-
-  paypalSection.style.display = "block";
-
-  paypalSection.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-
-  if (!paypalRendered) {
-    renderPayPal();
-  }
-});
-
-
-function renderPayPal() {
-
-  if (typeof paypal === "undefined") {
-    showStatus(
-      paymentStatus,
-      "PayPal could not load. Please refresh the page and try again.",
-      "error"
-    );
-
-    return;
-  }
-
-  paypalRendered = true;
-
-  paypal.Buttons({
-
-    style: {
-      layout: "vertical",
-      shape: "rect",
-      label: "paypal"
-    },
-
-
-    createOrder: async function() {
-
-      showStatus(
-        paymentStatus,
-        "Creating secure PayPal checkout..."
-      );
-
-      const response = await fetch("/api/paypal/create-order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-
-      const data = await response.json();
-
-      if (!response.ok || !data.id) {
-        throw new Error(
-          data.error || "Unable to create PayPal order."
-        );
-      }
-
-      return data.id;
-    },
-
-
-    onApprove: async function(data) {
-
-      showStatus(
-        paymentStatus,
-        "Confirming your payment..."
-      );
-
-      try {
-
-        const response = await fetch(
-          "/api/paypal/capture-order",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              orderID: data.orderID
-            })
-          }
-        );
-
-        const result = await response.json();
-
-        if (!response.ok || !result.success) {
-          throw new Error(
-            result.error ||
-            "Payment confirmation failed."
-          );
-        }
-
-        paymentCompleted = true;
-        paymentOrderID = data.orderID;
-
-        showStatus(
-          paymentStatus,
-          "Payment confirmed successfully.",
-          "success"
-        );
-
-        generateSection.style.display = "block";
-
-        generateSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      } catch (error) {
-
-        console.error(error);
-
-        showStatus(
-          paymentStatus,
-          error.message ||
-          "Unable to confirm payment.",
-          "error"
-        );
-      }
-    },
-
-
-    onCancel: function() {
-
-      showStatus(
-        paymentStatus,
-        "Payment was cancelled. You can try again."
-      );
-    },
-
-
-    onError: function(error) {
-
-      console.error("PayPal error:", error);
-
-      showStatus(
-        paymentStatus,
-        "PayPal checkout encountered an error. Please try again.",
-        "error"
-      );
-    }
-
-  }).render("#paypal-buttons-container");
-}
-
-
-generateButton.addEventListener("click", async function() {
-
-  if (!paymentCompleted) {
-    showStatus(
-      aiStatus,
-      "Payment must be completed before generating your CV.",
-      "error"
-    );
-
-    return;
-  }
-
-  if (!formData) {
-    formData = collectFormData();
-  }
-
-  generateButton.disabled = true;
-
-  showStatus(
-    aiStatus,
-    "CVFAST AI is creating your CV. Please wait..."
-  );
 
   try {
+    const {
+      fullName,
+      email,
+      phone,
+      location,
+      targetRole,
+      summary,
+      experience,
+      education,
+      skills,
+      languages,
+      paymentOrderID
+    } = req.body || {};
 
-    const response = await fetch("/api/generate-cv", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        ...formData,
-        paymentOrderID
-      })
-    });
+    if (!fullName || !targetRole) {
+      return res.status(400).json({
+        success: false,
+        error: "Full name and target role are required."
+      });
+    }
+
+    if (!paymentOrderID) {
+      return res.status(402).json({
+        success: false,
+        error: "Verified payment is required."
+      });
+    }
+
+    if (!process.env.OPENAI_API_KEY) {
+      return res.status(500).json({
+        success: false,
+        error: "OPENAI_API_KEY is not configured."
+      });
+    }
+
+    const prompt = `
+Create a professional ATS-friendly CV for the Dutch and international job market.
+
+CANDIDATE
+
+Full name:
+${fullName}
+
+Email:
+${email || ""}
+
+Phone:
+${phone || ""}
+
+Location:
+${location || ""}
+
+Target role:
+${targetRole}
+
+Professional background:
+${summary || ""}
+
+Work experience:
+${experience || ""}
+
+Education:
+${education || ""}
+
+Skills:
+${skills || ""}
+
+Languages:
+${languages || ""}
+
+INSTRUCTIONS
+
+Write the CV in professional English.
+
+Use this structure where relevant:
+
+FULL NAME
+Target Role
+
+PROFESSIONAL SUMMARY
+
+CORE SKILLS
+
+WORK EXPERIENCE
+
+EDUCATION
+
+LANGUAGES
+
+ADDITIONAL INFORMATION
+
+Rules:
+
+- Optimize for ATS systems.
+- Use clear professional wording.
+- Focus the content on the target role.
+- Improve grammar, clarity, structure and impact.
+- Use concise bullet points for work experience.
+- Emphasize achievements only when supported by the supplied information.
+- Never invent companies.
+- Never invent job titles.
+- Never invent employment dates.
+- Never invent education.
+- Never invent qualifications.
+- Never invent languages.
+- Never invent statistics, percentages, revenue numbers or achievements.
+- Preserve factual information supplied by the candidate.
+- Do not mention AI.
+- Do not include commentary before or after the CV.
+- Return only the finished CV.
+`;
+
+    const response = await fetch(
+      "https://api.openai.com/v1/responses",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "gpt-5-mini",
+          input: prompt
+        })
+      }
+    );
 
     const data = await response.json();
 
-    if (!response.ok || !data.success || !data.cv) {
-      throw new Error(
-        data.error ||
-        "Unable to generate your CV."
-      );
+    if (!response.ok) {
+      console.error("OpenAI error:", data);
+
+      return res.status(response.status).json({
+        success: false,
+        error:
+          data?.error?.message ||
+          "OpenAI CV generation failed."
+      });
     }
 
-    document.getElementById("cv-output").textContent = data.cv;
+    let cv = "";
 
-    showStatus(
-      aiStatus,
-      "Your CV was generated successfully.",
-      "success"
-    );
+    if (typeof data.output_text === "string") {
+      cv = data.output_text;
+    }
 
-    resultSection.style.display = "block";
+    if (!cv && Array.isArray(data.output)) {
+      for (const item of data.output) {
+        if (!Array.isArray(item.content)) continue;
 
-    resultSection.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
+        for (const content of item.content) {
+          if (
+            content.type === "output_text" &&
+            typeof content.text === "string"
+          ) {
+            cv += content.text;
+          }
+        }
+      }
+    }
+
+    cv = cv.trim();
+
+    if (!cv) {
+      return res.status(500).json({
+        success: false,
+        error: "OpenAI returned an empty CV."
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      cv
     });
 
   } catch (error) {
+    console.error("generate-cv error:", error);
 
-    console.error(error);
-
-    showStatus(
-      aiStatus,
-      error.message ||
-      "Something went wrong while generating your CV.",
-      "error"
-    );
-
-  } finally {
-
-    generateButton.disabled = false;
+    return res.status(500).json({
+      success: false,
+      error: "Unable to generate CV."
+    });
   }
-});
-
-
-document.getElementById("copy-btn").addEventListener(
-  "click",
-  async function() {
-
-    const text =
-      document.getElementById("cv-output").textContent;
-
-    try {
-
-      await navigator.clipboard.writeText(text);
-
-      this.textContent = "Copied ✓";
-
-      setTimeout(() => {
-        this.textContent = "Copy CV";
-      }, 1800);
-
-    } catch {
-
-      alert("Unable to copy automatically. Please select and copy the CV manually.");
-    }
-  }
-);
-
-
-document.getElementById("print-btn").addEventListener(
-  "click",
-  function() {
-    window.print();
-  }
-);
-</script>
-
-</body>
-</html>
+}
