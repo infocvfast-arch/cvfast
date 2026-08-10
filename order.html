@@ -3,7 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Order — CVFAST</title>
+
+<meta
+  name="description"
+  content="Choose your CVFAST CV service and pay securely through PayPal."
+>
 
 <style>
 *{box-sizing:border-box}
@@ -19,13 +25,21 @@
   --paypal:#ffc439;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
-  font-family:Inter,Arial,sans-serif;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   background:
     radial-gradient(circle at 80% 0%,rgba(70,160,110,.18),transparent 30%),
     linear-gradient(180deg,var(--bg),#03100c);
   color:#fff;
+}
+
+a{
+  text-decoration:none;
 }
 
 .wrap{
@@ -33,40 +47,71 @@ body{
   margin:auto;
 }
 
+/* HEADER */
+
 header{
-  padding:22px 0;
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(5,23,18,.96);
+  backdrop-filter:blur(16px);
+  padding:20px 0;
   border-bottom:1px solid var(--line);
 }
 
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
 .logo{
+  color:#fff;
   font-size:22px;
   font-weight:950;
   letter-spacing:3px;
 }
 
+.home-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:0 20px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  color:#062018;
+  font-weight:950;
+}
+
+/* MAIN */
+
 main{
-  padding:55px 0;
+  padding:55px 0 70px;
 }
 
 .back{
   display:inline-block;
   margin-bottom:28px;
   color:var(--green);
-  text-decoration:none;
-  font-weight:800;
+  font-weight:850;
 }
 
 h1{
   font-size:clamp(38px,6vw,58px);
   margin:0 0 12px;
+  letter-spacing:-.03em;
 }
 
 .lead{
-  max-width:760px;
+  max-width:780px;
   color:var(--muted);
-  line-height:1.7;
-  margin-bottom:36px;
+  line-height:1.75;
+  margin-bottom:38px;
 }
+
+/* PACKAGE GRID */
 
 .packages{
   display:grid;
@@ -77,7 +122,7 @@ h1{
 .card{
   background:linear-gradient(180deg,var(--card2),var(--card));
   border:1px solid var(--line);
-  padding:27px;
+  padding:28px;
   border-radius:24px;
   display:flex;
   flex-direction:column;
@@ -96,11 +141,16 @@ h1{
   border-radius:999px;
   font-size:12px;
   font-weight:950;
-  margin-bottom:12px;
+  margin-bottom:14px;
+}
+
+.card h2{
+  margin:0;
+  font-size:28px;
 }
 
 .price{
-  font-size:48px;
+  font-size:50px;
   font-weight:950;
   margin:16px 0 8px;
 }
@@ -108,7 +158,7 @@ h1{
 .delivery{
   color:var(--green);
   font-weight:850;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 p{
@@ -119,7 +169,7 @@ p{
 ul{
   list-style:none;
   padding:0;
-  margin:18px 0 26px;
+  margin:18px 0 28px;
 }
 
 li{
@@ -135,75 +185,129 @@ li::before{
   margin-right:9px;
 }
 
+/* PAYPAL BUTTON */
+
 .btn{
   display:block;
   text-align:center;
-  padding:16px;
+  padding:17px 16px;
   margin-top:auto;
-  border-radius:13px;
+  border-radius:14px;
   background:var(--paypal);
   color:#111;
   font-weight:950;
-  text-decoration:none;
+  transition:.2s ease;
 }
 
-.priority{
-  margin-top:24px;
-  padding:25px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:#0d2922;
+.btn:hover{
+  transform:translateY(-2px);
 }
 
-.priority strong{
-  color:var(--green);
-}
-
-.priority-btn{
-  display:inline-block;
-  padding:15px 22px;
-  border-radius:13px;
-  background:linear-gradient(135deg,var(--green),var(--green2));
-  color:#062018;
-  font-weight:950;
-  text-decoration:none;
+.checkout-note{
+  text-align:center;
+  font-size:12px;
+  color:var(--muted);
   margin-top:10px;
 }
 
-.help{
-  margin-top:40px;
+/* DELIVERY INFO */
+
+.delivery-info{
+  margin-top:28px;
   padding:28px;
   border:1px solid var(--line);
-  border-radius:20px;
+  border-radius:22px;
   background:#0d2922;
 }
 
+.delivery-info h2{
+  margin-top:0;
+}
+
+.delivery-options{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:20px;
+}
+
+.delivery-option{
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:16px;
+}
+
+.delivery-option strong{
+  display:block;
+  color:var(--green);
+  margin-bottom:8px;
+}
+
+/* AFTER PAYMENT */
+
+.help{
+  margin-top:30px;
+  padding:28px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:#0d2922;
+}
+
+.help h2{
+  margin-top:0;
+}
+
 .send-btn{
-  display:inline-block;
-  padding:16px 24px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:52px;
+  padding:0 24px;
   margin-top:12px;
-  border-radius:13px;
+  border-radius:14px;
   background:linear-gradient(135deg,var(--green),var(--green2));
   color:#062018;
   font-weight:950;
-  text-decoration:none;
 }
 
-.help a{
+.help a.contact-link{
   color:var(--green);
 }
 
+/* FOOTER */
+
 footer{
-  margin-top:50px;
-  padding:32px 0;
+  margin-top:45px;
+  padding:34px 0 55px;
   border-top:1px solid var(--line);
   color:var(--muted);
   line-height:1.8;
+  font-size:14px;
 }
 
+/* MOBILE */
+
 @media(max-width:760px){
-  .packages{
+
+  .packages,
+  .delivery-options{
     grid-template-columns:1fr;
+  }
+
+  main{
+    padding-top:38px;
+  }
+
+  .card{
+    padding:24px;
+  }
+
+  .price{
+    font-size:46px;
+  }
+
+  .home-btn{
+    padding:0 16px;
   }
 }
 </style>
@@ -212,33 +316,49 @@ footer{
 <body>
 
 <header>
-<div class="wrap">
-  <div class="logo">CVFAST</div>
+<div class="wrap header-inner">
+
+<a href="/" class="logo">
+CVFAST
+</a>
+
+<a href="/" class="home-btn">
+Home
+</a>
+
 </div>
 </header>
 
 <main>
 <div class="wrap">
 
-<a class="back" href="/">← Back to CVFAST</a>
+<a class="back" href="/">
+← Back to CVFAST
+</a>
 
 <h1>Choose your CV service</h1>
 
 <p class="lead">
-Choose the service that fits your needs and complete your payment securely through PayPal.
-After payment, submit your order details and upload your current CV.
+Choose the service that fits your needs and complete your payment securely
+through PayPal. For human-written services, you can choose Standard or
+Priority Delivery during checkout.
 </p>
 
 <div class="packages">
 
 <!-- AI CV -->
+
 <div class="card">
 
-<span class="badge">FASTEST</span>
+<span class="badge">
+FASTEST
+</span>
 
 <h2>AI CV Generator</h2>
 
-<div class="price">€9.99</div>
+<div class="price">
+€9.99
+</div>
 
 <div class="delivery">
 Instant — usually within minutes
@@ -256,28 +376,36 @@ Create a professional first version of your CV with AI.
 </ul>
 
 <a
-class="btn"
-href="https://www.paypal.com/ncp/payment/Z2PCVHGSJLMZY"
-target="_blank"
-rel="noopener">
+  class="btn"
+  href="https://www.paypal.com/ncp/payment/Z2PCVHGSJLMZY"
+  target="_blank"
+  rel="noopener">
 Pay €9.99 with PayPal
 </a>
+
+<div class="checkout-note">
+Secure checkout provided by PayPal
+</div>
 
 </div>
 
 <!-- CV REFRESH -->
+
 <div class="card">
 
 <h2>CV Refresh</h2>
 
-<div class="price">€19</div>
+<div class="price">
+€19
+</div>
 
 <div class="delivery">
-Delivery: 1–4 business days
+Standard delivery: 1–4 business days
 </div>
 
 <p>
-Improve and modernise your existing CV with professional ATS-friendly formatting.
+Improve and modernise your existing CV with professional,
+ATS-friendly formatting.
 </p>
 
 <ul>
@@ -288,30 +416,40 @@ Improve and modernise your existing CV with professional ATS-friendly formatting
 </ul>
 
 <a
-class="btn"
-href="https://www.paypal.com/ncp/payment/FLVP3F7W43V6E"
-target="_blank"
-rel="noopener">
-Pay €19 with PayPal
+  class="btn"
+  href="https://www.paypal.com/ncp/payment/LV9B82DTS2N2G"
+  target="_blank"
+  rel="noopener">
+Choose delivery & pay €19+
 </a>
+
+<div class="checkout-note">
+Choose Standard or Priority Delivery in PayPal
+</div>
 
 </div>
 
 <!-- PROFESSIONAL CV -->
+
 <div class="card popular">
 
-<span class="badge">MOST POPULAR</span>
+<span class="badge">
+MOST POPULAR
+</span>
 
 <h2>Professional CV</h2>
 
-<div class="price">€49</div>
+<div class="price">
+€49
+</div>
 
 <div class="delivery">
-Delivery: 1–3 business days
+Standard delivery: 1–3 business days
 </div>
 
 <p>
-A professionally written and ATS-optimized CV built around your experience and target roles.
+A professionally written and ATS-optimized CV built around your
+experience, strengths and target roles.
 </p>
 
 <ul>
@@ -323,28 +461,36 @@ A professionally written and ATS-optimized CV built around your experience and t
 </ul>
 
 <a
-class="btn"
-href="https://www.paypal.com/ncp/payment/MPKT58WSZJSFW"
-target="_blank"
-rel="noopener">
-Pay €49 with PayPal
+  class="btn"
+  href="https://www.paypal.com/ncp/payment/6YTRWKYJDXK22"
+  target="_blank"
+  rel="noopener">
+Choose delivery & pay €49+
 </a>
+
+<div class="checkout-note">
+Choose Standard or Priority Delivery in PayPal
+</div>
 
 </div>
 
 <!-- CV + COVER LETTER -->
+
 <div class="card">
 
 <h2>CV + Cover Letter</h2>
 
-<div class="price">€69</div>
+<div class="price">
+€69
+</div>
 
 <div class="delivery">
-Delivery: 1–3 business days
+Standard delivery: 1–3 business days
 </div>
 
 <p>
-A complete professional CV and cover letter package for stronger job applications.
+A complete professional CV and cover letter package for stronger
+job applications.
 </p>
 
 <ul>
@@ -356,35 +502,55 @@ A complete professional CV and cover letter package for stronger job application
 </ul>
 
 <a
-class="btn"
-href="https://www.paypal.com/ncp/payment/N2CG6WEY6ASFN"
-target="_blank"
-rel="noopener">
-Pay €69 with PayPal
+  class="btn"
+  href="https://www.paypal.com/ncp/payment/849GZGGHLERWG"
+  target="_blank"
+  rel="noopener">
+Choose delivery & pay €69+
 </a>
 
+<div class="checkout-note">
+Choose Standard or Priority Delivery in PayPal
 </div>
 
 </div>
 
-<!-- PRIORITY -->
+</div>
 
-<div class="priority">
+<!-- DELIVERY INFORMATION -->
 
-<h2>Need it sooner?</h2>
+<div class="delivery-info">
+
+<h2>Choose your delivery speed</h2>
 
 <p>
-<strong>Priority Delivery +€8</strong><br>
-Add priority handling to a human-written CV order. Your order will be moved forward in the queue and prepared as soon as possible.
+For human-written services, the delivery option is selected directly
+inside PayPal before completing payment.
 </p>
 
-<a
-class="priority-btn"
-href="https://www.paypal.com/ncp/payment/YYJWX6MMC5G5W"
-target="_blank"
-rel="noopener">
-Add Priority Delivery +€8
-</a>
+<div class="delivery-options">
+
+<div class="delivery-option">
+
+<strong>
+Standard Delivery
+</strong>
+
+Your CV is prepared within the normal delivery timeframe shown for your package.
+
+</div>
+
+<div class="delivery-option">
+
+<strong>
+Priority Delivery +€8
+</strong>
+
+Your order receives priority handling and is moved forward in the production queue.
+
+</div>
+
+</div>
 
 </div>
 
@@ -395,30 +561,34 @@ Add Priority Delivery +€8
 <h2>Already paid?</h2>
 
 <p>
-Complete the CVFAST Order Form and upload your current CV and career information so we can begin your order.
+After completing your PayPal payment, submit your order details and upload
+your current CV and career information so CVFAST can begin your order.
 </p>
 
 <a
-class="send-btn"
-href="https://tally.so/r/ja4aXY"
-target="_blank"
-rel="noopener">
+  class="send-btn"
+  href="https://tally.so/r/ja4aXY"
+  target="_blank"
+  rel="noopener">
 Send your CV & Order Details
 </a>
 
 <p style="margin-top:26px">
 Need help? WhatsApp:
 <a
-href="https://wa.me/31684071847?text=Hi%20CVFAST%2C%20I%20need%20help%20with%20my%20order."
-target="_blank"
-rel="noopener">
+  class="contact-link"
+  href="https://wa.me/31684071847?text=Hi%20CVFAST%2C%20I%20need%20help%20with%20my%20order."
+  target="_blank"
+  rel="noopener">
 +31 6 84071847
 </a>
 </p>
 
 <p>
 Email:
-<a href="mailto:infocvfast@gmail.com">
+<a
+  class="contact-link"
+  href="mailto:infocvfast@gmail.com">
 infocvfast@gmail.com
 </a>
 </p>
@@ -431,11 +601,22 @@ infocvfast@gmail.com
 <footer>
 <div class="wrap">
 
-<strong style="color:#fff">CVFAST</strong><br>
-Professional CV & Resume Services<br><br>
+<strong style="color:#fff">
+CVFAST
+</strong>
+<br>
 
-Secure payments are processed through PayPal.<br>
-CVFAST does not store your bank or card details.<br><br>
+Professional CV & Resume Services
+<br><br>
+
+Secure payments are processed through PayPal.
+<br>
+
+CVFAST does not store your bank or card details.
+<br>
+
+After payment, submit your CVFAST Order Form to begin your order.
+<br><br>
 
 © 2026 CVFAST. All rights reserved.
 
