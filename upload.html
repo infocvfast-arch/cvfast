@@ -3,15 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Send Your CV — CVFAST</title>
 
 <style>
 *{box-sizing:border-box}
 
+:root{
+  --bg:#051712;
+  --card:#102f27;
+  --line:#2a5849;
+  --green:#79e5b1;
+  --green2:#a9f2d0;
+  --muted:#b8ccc4;
+}
+
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:#071b17;
+  font-family:Inter,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(70,160,110,.18),transparent 30%),
+    linear-gradient(180deg,var(--bg),#03100c);
   color:#fff;
 }
 
@@ -22,12 +34,12 @@ body{
 
 header{
   padding:24px 0;
-  border-bottom:1px solid #255143;
+  border-bottom:1px solid var(--line);
 }
 
 .logo{
   font-size:25px;
-  font-weight:900;
+  font-weight:950;
   letter-spacing:.18em;
 }
 
@@ -36,85 +48,101 @@ main{
 }
 
 .back{
-  color:#68e0aa;
+  color:var(--green);
   text-decoration:none;
-  font-size:18px;
+  font-size:17px;
+  font-weight:800;
 }
 
 h1{
-  font-size:clamp(42px,8vw,65px);
-  margin:20px 0;
+  font-size:clamp(42px,8vw,64px);
+  margin:22px 0 15px;
 }
 
 .lead{
-  color:#b9cec6;
+  color:var(--muted);
   font-size:19px;
   line-height:1.7;
+  max-width:720px;
 }
 
 .card{
   margin-top:35px;
-  padding:28px;
-  border:1px solid #255143;
+  padding:30px;
+  border:1px solid var(--line);
   border-radius:24px;
-  background:#102f27;
+  background:var(--card);
 }
 
 .card h2{
   margin-top:0;
 }
 
-label{
-  display:block;
-  margin:20px 0 8px;
-  font-weight:bold;
+.steps{
+  display:grid;
+  gap:14px;
+  margin:25px 0;
 }
 
-input,select,textarea{
-  width:100%;
-  padding:16px;
-  border-radius:12px;
-  border:1px solid #356453;
-  background:#071b17;
-  color:white;
-  font-size:16px;
+.step{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
 }
 
-textarea{
-  min-height:130px;
-  resize:vertical;
+.step strong{
+  color:var(--green);
 }
 
 .btn{
   display:block;
   width:100%;
+  text-align:center;
   margin-top:22px;
   padding:17px;
-  border:0;
   border-radius:14px;
-  background:#82e2b1;
+  background:linear-gradient(135deg,var(--green),var(--green2));
   color:#062018;
   font-size:18px;
-  font-weight:900;
-  cursor:pointer;
+  font-weight:950;
+  text-decoration:none;
+}
+
+.secondary{
+  display:block;
+  text-align:center;
+  margin-top:14px;
+  padding:16px;
+  border:1px solid var(--green);
+  border-radius:14px;
+  color:var(--green);
+  text-decoration:none;
+  font-weight:850;
 }
 
 .note{
   margin-top:20px;
-  color:#b9cec6;
-  line-height:1.6;
+  color:var(--muted);
+  line-height:1.7;
 }
 
-.whatsapp{
-  display:block;
-  text-align:center;
-  margin-top:15px;
-  padding:16px;
-  border:1px solid #68e0aa;
-  border-radius:14px;
-  color:#68e0aa;
-  text-decoration:none;
-  font-weight:bold;
+.packages{
+  margin-top:25px;
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:16px;
+}
+
+.packages div{
+  margin:9px 0;
+  color:var(--muted);
+}
+
+footer{
+  border-top:1px solid var(--line);
+  padding:30px 0;
+  color:var(--muted);
+  line-height:1.8;
 }
 </style>
 </head>
@@ -123,85 +151,106 @@ textarea{
 
 <header>
 <div class="wrap">
-<div class="logo">CVFAST</div>
+  <div class="logo">CVFAST</div>
 </div>
 </header>
 
 <main>
 <div class="wrap">
 
-<a class="back" href="index.html">← Back to CVFAST</a>
+<a class="back" href="/">← Back to CVFAST</a>
 
-<h1>Send your CV</h1>
+<h1>Send your CV & order details</h1>
 
 <p class="lead">
-Thank you for choosing CVFAST. After completing your payment,
-send us your details and existing CV so we can begin your order.
+Thank you for choosing CVFAST. If you have completed your payment,
+please submit your order details and upload your current CV using our secure order form.
 </p>
 
 <div class="card">
 
-<h2>Order details</h2>
+<h2>Complete your order</h2>
 
-<form action="mailto:infocvfast@gmail.com"
-      method="post"
-      enctype="text/plain">
+<div class="steps">
 
-<label>Your name</label>
-<input
-  type="text"
-  name="Name"
-  placeholder="Your full name"
-  required>
+<div class="step">
+<strong>1. Enter your details</strong><br>
+Name, email and target job.
+</div>
 
-<label>Email</label>
-<input
-  type="email"
-  name="Email"
-  placeholder="Your email address"
-  required>
+<div class="step">
+<strong>2. Select your service</strong><br>
+Choose the package you paid for.
+</div>
 
-<label>Package</label>
-<select name="Package" required>
-<option value="">Select your package</option>
-<option>CV Refresh — €39</option>
-<option>Professional CV — €59</option>
-<option>CV + Cover Letter — €89</option>
-</select>
+<div class="step">
+<strong>3. Upload your CV</strong><br>
+Attach your current CV or resume file.
+</div>
 
-<label>Target job / profession</label>
-<input
-  type="text"
-  name="Target Job"
-  placeholder="Example: Project Manager">
+<div class="step">
+<strong>4. Submit your order</strong><br>
+CVFAST will receive your order and begin processing it.
+</div>
 
-<label>Additional information</label>
-<textarea
-  name="Information"
-  placeholder="Tell us about your experience, target jobs, preferred country, or anything else we should know."></textarea>
+</div>
 
-<button class="btn" type="submit">
-Send order details by Email
-</button>
+<a
+class="btn"
+href="https://tally.so/r/ja4aXY"
+target="_blank"
+rel="noopener">
+Open CVFAST Order Form
+</a>
 
-</form>
+<div class="packages">
+
+<strong>Your current service options</strong>
+
+<div>AI CV Generator — €9.99</div>
+<div>CV Refresh — €19</div>
+<div>Professional CV — €49</div>
+<div>CV + Cover Letter — €69</div>
+<div>Priority Delivery — +€8</div>
+
+</div>
 
 <p class="note">
-To send your existing CV file, contact CVFAST directly through
-WhatsApp or attach the file when your email application opens.
+Human-written services are delivered digitally according to the delivery time shown on the order page.
+Priority Delivery places your human-written order ahead in the queue.
 </p>
 
 <a
-class="whatsapp"
-href="https://wa.me/31684071847?text=Hi%20CVFAST%2C%20I%20have%20completed%20my%20order%20and%20would%20like%20to%20send%20my%20CV."
+class="secondary"
+href="https://wa.me/31684071847?text=Hi%20CVFAST%2C%20I%20have%20completed%20my%20payment%20and%20need%20help%20sending%20my%20CV."
 target="_blank"
 rel="noopener">
-Send CV via WhatsApp
+Need help? WhatsApp CVFAST
+</a>
+
+<a
+class="secondary"
+href="mailto:infocvfast@gmail.com">
+Email CVFAST
 </a>
 
 </div>
+
 </div>
 </main>
+
+<footer>
+<div class="wrap">
+
+<strong style="color:#fff">CVFAST</strong><br>
+Professional CV & Resume Services<br>
+Email: infocvfast@gmail.com<br>
+WhatsApp: +31 6 84071847<br><br>
+
+© 2026 CVFAST. All rights reserved.
+
+</div>
+</footer>
 
 </body>
 </html>
